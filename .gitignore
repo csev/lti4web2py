@@ -1,3 +1,17 @@
+
+# for web2py
+cache
+databases
+errors
+sessions
+progress.log
+
+# For vim
+
+*.swp
+
+# Python
+
 *.py[cod]
 
 # C extensions
