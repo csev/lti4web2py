@@ -5,6 +5,7 @@ databases
 errors
 sessions
 progress.log
+sql.log
 
 # For vim
 
