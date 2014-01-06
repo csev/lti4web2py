@@ -37,4 +37,31 @@ except:
     oauth_error = "Unexpected Error"
     consumer = None
 
+# Time to create / update / login the user
+if consumer is not None:
+    print params
+    user_id = params['user_id']
+    last_name = params['lis_person_name_family']
+    first_name = params['lis_person_name_given']
+    email = params['lis_person_contact_email_primary']
+
+    userinfo = dict()
+    userinfo['first_name'] = first_name;
+    userinfo['last_name'] = last_name;
+    userinfo['email'] = email;
+    userinfo['username'] = consumer.key + ":" + user_id;
+    print db.auth_user
+    print db.auth_user.password
+    print db.auth_user.password.validate('1C5CHFA_enUS503US503')
+    pw = db.auth_user.password.validate('1C5CHFA_enUS503US503')[0];
+    print pw 
+    userinfo['password'] = pw
+    print userinfo
+    user = auth.get_or_create_user(userinfo, update_fields=['email', 'first_name', 'last_name', 'password'])
+    print user, type(user)
+    print "Logging in..."
+    retval = auth.login_user(user)
+    print "Logged in...", retval, type(retval)
+    # context_id = params['context_id']
+
 
