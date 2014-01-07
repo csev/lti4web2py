@@ -2,17 +2,18 @@ import oauth
 
 class LTI_OAuthDataStore(oauth.OAuthDataStore):
 
-    db = None
+    key = None
+    secret = None
 
-    def __init__(self, db):
-        self.db = db
+    def __init__(self, key, secret):
+        self.key = key
+        self.secret = secret
         pass
 
     def lookup_consumer(self, key):
-        myrecord = self.db(self.db.lti_keys.consumer==key).select().first()
-        # print myrecord, type(myrecord)
-        if myrecord is None : return None
-        return oauth.OAuthConsumer(key, myrecord['secret'])
+        if key == self.key :
+            return oauth.OAuthConsumer(key, self.secret)
+        return None
 
     # We don't do request_tokens
     def lookup_token(self, token_type, token):
